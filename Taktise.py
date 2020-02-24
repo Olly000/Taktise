@@ -7,7 +7,7 @@ from pydub import AudioSegment
 
 class Taktise:
     def __init__(self):
-        self.target = input("which subfolder of current directory to be converted?: ")
+        self.target = input("which folder to be converted?: ")
         self.path = os.getcwd() + "/" + self.target
         self.out_path = self.create_dir()
         self.file_list = os.listdir(self.path)
@@ -33,6 +33,7 @@ class Taktise:
         for file in self.file_list:
             if file.endswith(".wav") or file.endswith(".mp3"):
                 self.file_convert(file)
+        print("Conversion Completed")
 
 
 if __name__ == '__main__':
