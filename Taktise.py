@@ -3,7 +3,6 @@
 import os
 import errno
 from pydub import AudioSegment
-from pydub.playback import play
 
 
 class Taktise:
@@ -23,21 +22,17 @@ class Taktise:
                 exit(0)
         return destination
 
-    def file_convert_wav(self, file):
-        file_container = AudioSegment.from_wav(f"{self.path}/{file}")
+    def file_convert(self, file):
+        file_container = AudioSegment.from_file(f"{self.path}/{file}")
         file_container = file_container.set_frame_rate(48000).set_channels(1)
+        if file.endswith("mp3"):
+            file = file.split('.')[0] + ".wav"
         file_container.export(out_f=f"{self.out_path}/{file}", format="wav")
-
-    def file_convert_mp3(self, file):
-        file_container = AudioSegment.from_mp3(file)
-        file_container.export()
 
     def loop_files(self):
         for file in self.file_list:
-            if file.endswith(".wav"):
-                self.file_convert_wav(file)
-            elif file.endswith(".mp3"):
-                self.file_convert_mp3(file)
+            if file.endswith(".wav") or file.endswith(".mp3"):
+                self.file_convert(file)
 
 
 if __name__ == '__main__':
