@@ -37,5 +37,5 @@ class Taktise:
 
 
 if __name__ == '__main__':
-    test = Taktise()
-    test.loop_files()
+    process = Taktise()
+    process.loop_files()
